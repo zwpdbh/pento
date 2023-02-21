@@ -2,8 +2,15 @@ defmodule PentoWeb.WrongLive do
   use Phoenix.LiveView, layout: {PentoWeb.LayoutView, "live.html"}
 
   # 1) route call this function to inital state
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, score: 0, message: "Make a guess:", time: time())}
+  def mount(_params, session, socket) do
+
+    {:ok, assign(
+      socket,
+      score: 0,
+      message: "Make a guess:",
+      time: time(),
+      session_id: session["live_socket_id"]
+      )}
   end
 
   # 2) inital state is then looking for render
@@ -18,6 +25,10 @@ defmodule PentoWeb.WrongLive do
         <%= for n <- 1..10 do %>
           <a href="#" phx-click="guess" phx-value-number= {n} ><%= n %></a>
         <% end %>
+        <pre>
+          <%= @current_user.email %>
+          <%= @session_id %>
+        </pre>
       </h2>
     """
   end
