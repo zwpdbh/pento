@@ -1,0 +1,9 @@
+{
+    "emmet.useInlineCompletions": false,
+    "editor.wordBasedSuggestions": true,
+    "editor.quickSuggestions": {
+        "comments": "on",
+        "strings": "on",
+        "other": "on"
+    }
+}
