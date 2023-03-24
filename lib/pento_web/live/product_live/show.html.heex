@@ -14,28 +14,24 @@
 <% end %>
 
 <ul>
-
   <li>
-    <strong>Name:</strong>
-    <%= @product.name %>
+    <strong>Name:</strong> <%= @product.name %>
   </li>
-
+  
   <li>
-    <strong>Description:</strong>
-    <%= @product.description %>
+    <strong>Description:</strong> <%= @product.description %>
   </li>
-
+  
   <li>
-    <strong>Unit price:</strong>
-    <%= @product.unit_price %>
+    <strong>Unit price:</strong> <%= @product.unit_price %>
   </li>
-
+  
   <li>
-    <strong>Sku:</strong>
-    <%= @product.sku %>
+    <strong>Sku:</strong> <%= @product.sku %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.product_show_path(@socket, :edit, @product), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.product_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.product_show_path(@socket, :edit, @product), class: "button") %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.product_index_path(@socket, :index)) %></span>

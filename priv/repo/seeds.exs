@@ -13,12 +13,11 @@
 alias Pento.Catalog
 
 products = [
-
   %{
-   name: "Chess",
-   description: "The classic strategy game",
-   sku: 5_678_910,
-   unit_price: 10.00
+    name: "Chess",
+    description: "The classic strategy game",
+    sku: 5_678_910,
+    unit_price: 10.00
   },
   %{
     name: "Tic-Tac-Toe",
@@ -32,7 +31,6 @@ products = [
     sku: 15_222_324,
     unit_price: 12.00
   }
-
 ]
 
 Enum.each(products, fn product ->

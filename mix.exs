@@ -50,7 +50,7 @@ defmodule Pento.MixProject do
       {:jason, "~> 1.2"},
       {:pbkdf2_elixir, "~> 1.4"},
       {:plug_cowboy, "~> 2.5"},
-      {:elixir_sense, github: "elixir-lsp/elixir_sense"},
+      {:elixir_sense, github: "elixir-lsp/elixir_sense"}
     ]
   end
 
