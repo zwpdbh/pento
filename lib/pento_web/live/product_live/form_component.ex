@@ -21,9 +21,15 @@ defmodule PentoWeb.ProductLive.FormComponent do
   end
 
   defp handle_progress(:image, entry, socket) do
+    :timer.sleep(200)
+
     if entry.done? do
       {:ok, path} = consume_uploaded_entry(socket, entry, &upload_static_file(&1, socket))
-      {:noreply, socket}
+
+      {:noreply,
+       socket
+       |> put_flash(:info, "file #{entry.client_name} uploaded")}
+       |> assign(:image_upload, path)
     else
       {:noreply, socket}
     end
@@ -50,8 +56,10 @@ defmodule PentoWeb.ProductLive.FormComponent do
     save_product(socket, socket.assigns.action, product_params)
   end
 
-  defp save_product(socket, :edit, product_params) do
-    case Catalog.update_product(socket.assigns.product, product_params) do
+  defp save_product(socket, :edit, params) do
+    result = Catalog.update_product(socket.assigns.product, product_params(socket, params))
+
+    case result do
       {:ok, _product} ->
         {:noreply,
          socket
@@ -63,8 +71,8 @@ defmodule PentoWeb.ProductLive.FormComponent do
     end
   end
 
-  defp save_product(socket, :new, product_params) do
-    case Catalog.create_product(product_params) do
+  defp save_product(socket, :new, params) do
+    case Catalog.create_product(product_params(socket, params)) do
       {:ok, _product} ->
         {:noreply,
          socket
@@ -74,5 +82,9 @@ defmodule PentoWeb.ProductLive.FormComponent do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
     end
+  end
+
+  defp product_params(socket, params) do
+    Map.put(params, "image_upload", socket.assigns.image_upload)
   end
 end
